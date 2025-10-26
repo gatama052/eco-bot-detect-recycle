@@ -87,13 +87,13 @@ const Index = () => {
       {/* Header */}
       <header className="bg-card border-b border-border px-4 py-3 shadow-sm">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-              <Leaf className="w-6 h-6 text-primary-foreground" />
+          <div className="flex items-center gap-3">
+            <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
+              <Leaf className="w-8 h-8 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-lg font-bold text-foreground">IlmiGreen</h1>
-              <p className="text-xs text-muted-foreground">AI untuk Bumi yang Lebih Hijau</p>
+              <h1 className="text-2xl font-bold text-foreground">IlmiGreen</h1>
+              <p className="text-muted-foreground">AI untuk Bumi yang Lebih Hijau</p>
             </div>
           </div>
         </div>
@@ -121,73 +121,99 @@ const Index = () => {
         </div>
 
         {/* Detection Section */}
-        <div className="bg-card rounded-3xl border border-border p-6 shadow-lg">
+        <div className="bg-card rounded-3xl border border-border p-8 shadow-lg space-y-6">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger value="image" className="rounded-full">
-                <Upload className="w-4 h-4 mr-2" />
-                Upload Gambar
-              </TabsTrigger>
-              <TabsTrigger value="text" className="rounded-full">
-                <Sparkles className="w-4 h-4 mr-2" />
-                Tulis Deskripsi
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="image" className="space-y-4">
-              <div className="border-2 border-dashed border-border rounded-2xl p-8 text-center hover:border-primary transition-colors cursor-pointer">
-                <input
-                  type="file"
-                  accept="image/png,image/jpeg,image/jpg"
-                  onChange={handleImageUpload}
-                  className="hidden"
-                  id="image-upload"
-                />
-                <label htmlFor="image-upload" className="cursor-pointer">
-                  {selectedImage ? (
-                    <img
-                      src={selectedImage}
-                      alt="Preview"
-                      className="max-h-64 mx-auto rounded-lg"
-                    />
-                  ) : (
-                    <>
-                      <Upload className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
-                      <p className="text-foreground font-medium mb-1">
-                        Klik untuk upload atau drag & drop
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        PNG, JPG (Maks. 5MB)
-                      </p>
-                    </>
-                  )}
+            <TabsContent value="image" className="space-y-6 mt-0">
+              <input
+                type="file"
+                accept="image/png,image/jpeg,image/jpg"
+                onChange={handleImageUpload}
+                className="hidden"
+                id="image-upload"
+              />
+              
+              {selectedImage ? (
+                <div className="space-y-4">
+                  <img
+                    src={selectedImage}
+                    alt="Preview"
+                    className="max-h-64 mx-auto rounded-2xl shadow-md"
+                  />
+                  <label htmlFor="image-upload">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="w-full rounded-full h-14 text-base"
+                      onClick={() => document.getElementById('image-upload')?.click()}
+                    >
+                      <Upload className="w-5 h-5 mr-2" />
+                      Ganti Foto
+                    </Button>
+                  </label>
+                </div>
+              ) : (
+                <label htmlFor="image-upload">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className="w-full rounded-full h-16 text-lg font-semibold border-2 hover:border-primary hover:bg-primary/5 transition-all"
+                    onClick={() => document.getElementById('image-upload')?.click()}
+                  >
+                    <Upload className="w-6 h-6 mr-3" />
+                    📸 Ambil/Unggah Foto Sampah
+                  </Button>
                 </label>
+              )}
+
+              <div className="text-center">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("text")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors underline"
+                >
+                  Atau, masukkan deskripsi jenis sampah secara manual
+                </button>
               </div>
             </TabsContent>
 
-            <TabsContent value="text" className="space-y-4">
-              <Textarea
-                value={textInput}
-                onChange={(e) => setTextInput(e.target.value)}
-                placeholder="Deskripsikan sampah yang ingin Anda identifikasi, misalnya: 'botol plastik bekas minuman'"
-                className="min-h-32 resize-none rounded-2xl border-border focus-visible:ring-ring"
-              />
+            <TabsContent value="text" className="space-y-6 mt-0">
+              <div className="space-y-3">
+                <label className="text-sm text-muted-foreground block">
+                  Deskripsikan sampah yang ingin Anda identifikasi
+                </label>
+                <Textarea
+                  value={textInput}
+                  onChange={(e) => setTextInput(e.target.value)}
+                  placeholder="Contoh: botol plastik bekas minuman, kulit pisang, baterai bekas..."
+                  className="min-h-32 resize-none rounded-2xl border-border focus-visible:ring-ring text-base"
+                />
+              </div>
+
+              <div className="text-center">
+                <button
+                  type="button"
+                  onClick={() => setActiveTab("image")}
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors underline"
+                >
+                  Atau, unggah foto sampah
+                </button>
+              </div>
             </TabsContent>
           </Tabs>
 
           <Button
             onClick={detectWaste}
             disabled={isDetecting}
-            className="w-full mt-4 rounded-full h-12 text-base font-semibold bg-primary hover:bg-primary/90"
+            className="w-full rounded-full h-16 text-lg font-bold bg-primary hover:bg-primary/90 hover:shadow-lg transition-all"
           >
             {isDetecting ? (
               <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                Mendeteksi...
+                <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                Mendeteksi Sampah...
               </>
             ) : (
               <>
-                <Sparkles className="w-5 h-5 mr-2" />
+                <Sparkles className="w-6 h-6 mr-2" />
                 Deteksi Sampah
               </>
             )}
