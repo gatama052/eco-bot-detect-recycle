@@ -13,7 +13,7 @@ Sistem akan secara otomatis mengklasifikasikan kategori sampah dan memberikan **
 
 ## Tujuan Proyek
 Meningkatkan **kesadaran masyarakat terhadap pengelolaan sampah yang bijak dan berkelanjutan** dengan bantuan teknologi AI.  
-_Bersama AI, kita belajar mencintai bumi dengan cara yang cerdas, bermanfaat, dan modern serta mewujudkan bumi yang lebih hijau._  
+_Bersama AI, kita belajar mencintai bumi dengan cara yang cerdas, bermanfaat, dan mengikuti perkembangan zaman serta mewujudkan bumi yang lebih hijau._  
 
 ##  Demo & Repositori
 - **Website (Demo):** [https://ilmigreen.vercel.app](https://ilmigreen.vercel.app)  
