@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Leaf, X, Send } from "lucide-react";
+import { Bot, X, Send } from "lucide-react";
 import { toast } from "sonner";
 
 type Message = {
@@ -120,12 +120,12 @@ const Chat = () => {
       {/* Header */}
       <header className="bg-card border-b border-border px-4 py-3 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center">
-            <Leaf className="w-8 h-8 text-primary-foreground" />
+          <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center">
+            <Bot className="w-8 h-8 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-foreground">IlmiGreen Assistant</h1>
-            <p className="text-sm text-muted-foreground">Siap membantu Anda</p>
+            <h1 className="text-2xl font-bold text-foreground">IlmiGreen Assistant</h1>
+            <p className="text-muted-foreground">Siap membantu Anda</p>
           </div>
         </div>
         <Button
